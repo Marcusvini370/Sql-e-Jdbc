@@ -145,7 +145,7 @@ public class Aluno {
 			
 		}
 		
-		return somaNotas / 4;
+		return somaNotas / 1;
 	}
 	
 	/* Método que retorna True para aprovado e False para reprovado */
