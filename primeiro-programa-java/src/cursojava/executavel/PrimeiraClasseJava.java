@@ -1,15 +1,21 @@
 
 package cursojava.executavel;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Scanner;
 
-import javax.imageio.plugins.jpeg.JPEGQTable;
+
 import javax.swing.JOptionPane;
 import cursojava.classes.Aluno;
+import cursojava.classes.Diretor;
 import cursojava.classes.Disciplina;
+import cursojava.classes.Secretario;
+import cursojava.classesauxiliares.FuncaoAutenticacao;
 import cursojava.constantes.StatusAluno;
+import cursojava.interfaces.PermitirAcesso;
 
 public class PrimeiraClasseJava {
 
@@ -17,24 +23,36 @@ public class PrimeiraClasseJava {
 	private static String qtd;
 
 	// Main é um método autoexecutavel em java
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
+		
+		try {
+		
+		
+		File fil = new File("C://lines.txt");
+		Scanner scanner = new Scanner(fil);
 		
 		String login = JOptionPane.showInputDialog("Informe o login");
 		String senha = JOptionPane.showInputDialog("Informe a senha");
 		
-		if(login.equalsIgnoreCase("admin") && 
-		senha.equalsIgnoreCase("admin")) {
+		
+		
+		Secretario secretario = new Secretario(); // Diretamente com o objeto //
+		secretario.setLogin(login);
+		secretario.setSenha(senha);
+		
+		if(new FuncaoAutenticacao( new Diretor(login, senha)).autenticar()) { /* vou travar o 
+		contrato para autorizar somente quem tem o contrato 100% legitimo */
 			
 	
 
-		List<Aluno> alunos = new ArrayList<Aluno>();
+		List<Aluno> alunos = null;
 		
 		/*É uma lista que dentro dela temos uma chave que identifica uma sequencia de valoes também */
 		HashMap<String, List<Aluno>> maps = new HashMap<String, List<Aluno>>();
 		
 
 		
-		for(int qtd = 1; qtd <= 5; qtd++){
+		for(int qtd = 1; qtd <= 1; qtd++){
 		
 		
 		/* Agora temos objetos reais na memória */
@@ -46,8 +64,8 @@ public class PrimeiraClasseJava {
 	
 	
 	String nome = JOptionPane.showInputDialog("Qual o nome do aluno " + qtd + "");
-	 /*String idade = JOptionPane.showInputDialog("Qual a idade do aluno?");
-	 String dataNascimento = JOptionPane.showInputDialog("Qual a data de nascimento do aluno?");
+	 String idade = JOptionPane.showInputDialog("Qual a idade do aluno?");
+	 /*String dataNascimento = JOptionPane.showInputDialog("Qual a data de nascimento do aluno?");
 	 String registroGeral = JOptionPane.showInputDialog("Registro Geral?");
 	 String numeroCpf = JOptionPane.showInputDialog("Número do CPF?");
 	 String nomePai = JOptionPane.showInputDialog("Nome do Pai?");
@@ -60,8 +78,8 @@ public class PrimeiraClasseJava {
 
 			
 		aluno1.setNome(nome);
-		/*aluno1.setIdade(Integer.valueOf(idade)); // converter String em int
-		aluno1.setDataNascimento(dataNascimento);
+		aluno1.setIdade(Integer.valueOf(idade)); // converter String em int
+		/*aluno1.setDataNascimento(dataNascimento);
 		aluno1.setRegistroGeral(registroGeral);
 		aluno1.setNumeroCpf(numeroCpf);
 		aluno1.setNomePai(nomePai);
@@ -137,7 +155,49 @@ public class PrimeiraClasseJava {
 			 
 		}
 		
+		}else {
+			JOptionPane.showInputDialog(null, "Acesso não permitido");
 		}
+		
+		}catch (NumberFormatException e) {
+			
+			StringBuilder saida = new StringBuilder();
+			
+			/*Imprimi erro no console java */
+			e.printStackTrace(); 
+			
+			/* Mensagen de erro ou causa */
+			System.out.println("\n Mensagem: " + e.getMessage());
+			
+			for(int erro = 0; erro < e.getStackTrace().length; erro++) {
+				
+				saida.append("\n Classe de erro: "  + e.getStackTrace()[erro].getClassName());
+				saida.append("\n Método de erro: "  + e.getStackTrace()[erro].getMethodName());
+				saida.append("\n linha de erro: "  + e.getStackTrace()[erro].getLineNumber());
+				saida.append("\n Class: "  + e.getClass().getName());
+			}
+			
+			
+			JOptionPane.showMessageDialog(null, "Erro de conversão de número " + saida.toString());
+			
+		}catch(NullPointerException e){ /* Erro específico */
+			JOptionPane.showMessageDialog(null, "Erro de conversão de número " + e.getClass());
+			
+		}catch(Exception e) { /*Captura todas as exceções que não prevemos */
+
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro inesperado: " + e.getClass().getName());
+			
+		}finally { /* Sempre é executado acontecendo erros ou não. Porquê */
+				   /* Finally sempre é usado quando precisa executar um processo 
+				    * acontecendo erro ou não no sistema. */
+			JOptionPane.showMessageDialog(null, " Obrigado por aprender java comigo");
+		}
+		
+	}
+
+	private static Secretario Secretario() {
+		return null;
 	}
 }
 

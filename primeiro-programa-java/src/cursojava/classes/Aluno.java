@@ -5,22 +5,15 @@ import java.util.List;
 
 import cursojava.constantes.StatusAluno;
 
-public class Aluno {
+public class Aluno extends Pessoa {
 	
 	/* Esses são os atributos do Aluno */
 	/* se um atributo for privada vai poder ser usado apenas 
 	 * na classe dele, se for público pode puxar em outras */
-	private String nome;
-	private int idade;
-	private String dataNascimento;
-	private String registroGeral;
-	private String numeroCpf;
-	private String nomeMae;
-	private String nomePai;
+
 	private String dataMatricula;
 	private String nomeEscola;
 	private String serieMatriculado;
-	
 	private List<Disciplina> disciplinas = new ArrayList<Disciplina>();
 	
 	public void setDisciplinas(List<Disciplina> disciplinas) {
@@ -209,6 +202,28 @@ public class Aluno {
 			return true;
 		}
 		
+	@Override /* Indentifica método sobreescrito ou sobreescrevendo o método */
+	public boolean pessoaMaiorIdade() {
+
+		return idade >= 21;
 		
+	}
+	
+	public String msgMaiorIdade() {
+		return this.pessoaMaiorIdade() ? "Obaa aluno é maior de idade" : 
+			"Ixii voce é menor de idade";
+	}
+
+	@Override
+	public double salario() {
 		
-}
+		return 1500.90;
+	}
+	
+	
+
+	}
+		
+	
+		
+
