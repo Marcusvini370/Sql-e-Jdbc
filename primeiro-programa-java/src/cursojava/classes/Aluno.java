@@ -134,11 +134,11 @@ public class Aluno extends Pessoa {
 		
 		for (Disciplina disciplina : disciplinas) {
 			
-			somaNotas += disciplina.getNota();
+			somaNotas += disciplina.getMediaNotas();
 			
 		}
 		
-		return somaNotas / 1;
+		return somaNotas / disciplinas.size();
 	}
 	
 	/* Método que retorna True para aprovado e False para reprovado */

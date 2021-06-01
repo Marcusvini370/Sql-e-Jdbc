@@ -1,14 +1,14 @@
 
 package cursojava.executavel;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
-
-
 import javax.swing.JOptionPane;
+import curso.java.exececao.ExecaoProcessarNota;
 import cursojava.classes.Aluno;
 import cursojava.classes.Diretor;
 import cursojava.classes.Disciplina;
@@ -25,11 +25,10 @@ public class PrimeiraClasseJava {
 	// Main é um método autoexecutavel em java
 	public static void main(String[] args) { 
 		
+		
+		
 		try {
 		
-		
-		File fil = new File("C://lines.txt");
-		Scanner scanner = new Scanner(fil);
 		
 		String login = JOptionPane.showInputDialog("Informe o login");
 		String senha = JOptionPane.showInputDialog("Informe a senha");
@@ -45,7 +44,7 @@ public class PrimeiraClasseJava {
 			
 	
 
-		List<Aluno> alunos = null;
+		List<Aluno> alunos = new ArrayList<Aluno>();
 		
 		/*É uma lista que dentro dela temos uma chave que identifica uma sequencia de valoes também */
 		HashMap<String, List<Aluno>> maps = new HashMap<String, List<Aluno>>();
@@ -63,7 +62,7 @@ public class PrimeiraClasseJava {
 	
 	
 	
-	String nome = JOptionPane.showInputDialog("Qual o nome do aluno " + qtd + "");
+	 String nome = JOptionPane.showInputDialog("Qual o nome do aluno " + qtd + "");
 	 String idade = JOptionPane.showInputDialog("Qual a idade do aluno?");
 	 /*String dataNascimento = JOptionPane.showInputDialog("Qual a data de nascimento do aluno?");
 	 String registroGeral = JOptionPane.showInputDialog("Registro Geral?");
@@ -159,7 +158,7 @@ public class PrimeiraClasseJava {
 			JOptionPane.showInputDialog(null, "Acesso não permitido");
 		}
 		
-		}catch (NumberFormatException e) {
+		}catch (Exception e) {
 			
 			StringBuilder saida = new StringBuilder();
 			
@@ -180,25 +179,20 @@ public class PrimeiraClasseJava {
 			
 			JOptionPane.showMessageDialog(null, "Erro de conversão de número " + saida.toString());
 			
-		}catch(NullPointerException e){ /* Erro específico */
-			JOptionPane.showMessageDialog(null, "Erro de conversão de número " + e.getClass());
-			
-		}catch(Exception e) { /*Captura todas as exceções que não prevemos */
-
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Erro inesperado: " + e.getClass().getName());
-			
 		}finally { /* Sempre é executado acontecendo erros ou não. Porquê */
 				   /* Finally sempre é usado quando precisa executar um processo 
 				    * acontecendo erro ou não no sistema. */
 			JOptionPane.showMessageDialog(null, " Obrigado por aprender java comigo");
 		}
-		
+	}
+	
+	public static void lerArquivo() throws FileNotFoundException{
+	
+			File fil = new File("C://linet.txt");
+			Scanner scanner = new Scanner(fil);
+	
 	}
 
-	private static Secretario Secretario() {
-		return null;
-	}
 }
 
 
